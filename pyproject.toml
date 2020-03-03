@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.8"
 jinja2 = "^2.11.1"
 tomlkit = "^0.5.11"
+mistune = {git = "https://github.com/lepture/mistune"}
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.761"
@@ -16,8 +17,11 @@ taskipy = "^1.1.3"
 flake8 = "^3.7.9"
 
 [tool.taskipy.tasks]
+build = "python shimaenaga.py"
 lint = "flake8 shimaenaga.py"
 typecheck = "mypy shimaenaga.py"
+format-html = "prettier dest/* --write"
+chirp = "task build && task format-html"
 
 [build-system]
 requires = ["poetry>=0.12"]

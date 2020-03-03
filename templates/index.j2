@@ -1,9 +1,5 @@
 {% extends 'base.j2' %}
 
 {% block content%}
-    <ul>
-      {% for name in names %}
-      <li>{{ name }}</li>
-      {% endfor %}
-    </ul>
+    {{ body }}
 {% endblock content %}

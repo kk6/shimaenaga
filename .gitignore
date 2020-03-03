@@ -131,3 +131,5 @@ dmypy.json
 # This project
 dest/
 *.code-workspace
+pages/
+posts/
