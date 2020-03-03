@@ -11,6 +11,13 @@ jinja2 = "^2.11.1"
 tomlkit = "^0.5.11"
 
 [tool.poetry.dev-dependencies]
+mypy = "^0.761"
+taskipy = "^1.1.3"
+flake8 = "^3.7.9"
+
+[tool.taskipy.tasks]
+lint = "flake8 shimaenaga.py"
+typecheck = "mypy shimaenaga.py"
 
 [build-system]
 requires = ["poetry>=0.12"]

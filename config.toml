@@ -1,2 +1,7 @@
 [metadata]
 title = "Site title"
+
+[directory]
+root = "."
+template = "templates"
+dest = "dest"
