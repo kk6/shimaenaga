@@ -1,5 +1,16 @@
 {% extends 'base.j2' %}
 
 {% block content%}
+    {% if metadata %}
+    <h1>{{ metadata.title }}</h1>
+    {% if metadata.tags %}
+    <ul>
+      {% for tag in metadata.tags %}
+      <li>{{ tag }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endif %}
+
     {{ body }}
 {% endblock content %}

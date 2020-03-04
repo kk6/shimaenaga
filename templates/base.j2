@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ site_metadata.language_code }}">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ metadata.title }}</title>
+    <meta charset="{{ site_metadata.charset }}" />
+    <meta name="viewport" content="{{ site_metadata.viewport }}" />
+    <title>{{ site_metadata.title }}</title>
   </head>
   <body>
   {% block content %}

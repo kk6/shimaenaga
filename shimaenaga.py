@@ -1,6 +1,6 @@
 import os
 import pathlib
-from typing import Dict, List
+from typing import Optional, Dict, List, Tuple
 
 from jinja2 import Environment, FileSystemLoader, Template
 import tomlkit
@@ -48,10 +48,17 @@ def get_posts(posts_path: pathlib.Path) -> List:
     return posts
 
 
-def parse_markdown(markdown_path: pathlib.Path) -> str:
+def parse_markdown(markdown_path: pathlib.Path) -> Tuple[Optional[Dict], str]:
     with open(markdown_path) as f:
-        html = mistune.html(f.read())
-    return html
+        text = f.read()
+    if text.startswith("+++\n"):
+        _, meta_text, markdown = text.split("+++\n")
+        metadata = tomlkit.parse(meta_text)
+    else:
+        metadata = None
+        markdown = text
+    html = mistune.html(markdown)
+    return metadata, html
 
 
 def dump_html(dest_dir: pathlib.Path, content: str, filename: str) -> None:
@@ -78,8 +85,12 @@ def main() -> None:
     markdowns.extend(posts)
     for md in markdowns:
         name, ext = md.name.split(".md")
-        body = parse_markdown(md)
-        context = {"metadata": config["metadata"], "body": body}
+        metadata, body = parse_markdown(md)
+        context = {
+            "site_metadata": config["metadata"],
+            "metadata": metadata,
+            "body": body,
+        }
         html = template.render(**context)
         dump_html(dest_dir, html, f"{name}.html")
 
