@@ -32,11 +32,6 @@ def get_pages(pages_path: pathlib.Path) -> List:
         path = pages_path / page
         if str(path).endswith(".md"):
             pages.append(path)
-        else:
-            if path.is_dir():
-                posts = os.listdir(path)
-                for post in posts:
-                    pages.append(path / post)
     return pages
 
 
