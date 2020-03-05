@@ -13,10 +13,14 @@ PAGE_DIR = "pages"
 POST_DIR = "posts"
 
 
+def read_file(path: pathlib.Path) -> str:
+    with open(path) as f:
+        return f.read()
+
+
 def parse_config(config_file: str) -> Dict:
-    with open(config_file) as f:
-        config = tomlkit.parse(f.read())
-    return config
+    toml = read_file(config_file)
+    return tomlkit.parse(toml)
 
 
 def get_template(template_path: pathlib.Path, filename: str) -> Template:
@@ -44,8 +48,7 @@ def get_posts(posts_path: pathlib.Path) -> List:
 
 
 def parse_markdown(markdown_path: pathlib.Path) -> Tuple[Optional[Dict], str]:
-    with open(markdown_path) as f:
-        text = f.read()
+    text = read_file(markdown_path)
     if text.startswith("+++\n"):
         _, meta_text, markdown = text.split("+++\n")
         metadata = tomlkit.parse(meta_text)

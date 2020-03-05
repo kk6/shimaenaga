@@ -4,9 +4,22 @@
     <meta charset="{{ site_metadata.charset }}" />
     <meta name="viewport" content="{{ site_metadata.viewport }}" />
     <title>{{ site_metadata.title }}</title>
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/skeleton.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Noto+Sans+JP"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body>
-  {% block content %}
-  {% endblock content %}
+  <body class="wf-notosansjapanese">
+    <div class="container">
+      <header>
+        <h1 class="site-title">{{ site_metadata.title }}</h1>
+      </header>
+    </div>
+    <hr />
+    {% block content %} {% endblock content %}
   </body>
 </html>

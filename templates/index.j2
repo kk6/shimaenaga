@@ -1,16 +1,17 @@
-{% extends 'base.j2' %}
+{% extends 'base.j2' %} {% block content%}
+<div class="container">
+  {% if metadata %}
+  <h1>{{ metadata.title }}</h1>
+  {% if metadata.tags %}
+  <ul class="tags">
+    {% for tag in metadata.tags %}
+    <li>
+      <a class="tag">{{ tag }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endif %}
 
-{% block content%}
-    {% if metadata %}
-    <h1>{{ metadata.title }}</h1>
-    {% if metadata.tags %}
-    <ul>
-      {% for tag in metadata.tags %}
-      <li>{{ tag }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endif %}
-
-    {{ body }}
+  {{ body }}
+</div>
 {% endblock content %}
