@@ -1,9 +1,10 @@
 import os
 import pathlib
-from typing import Optional, Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple, Union
 
-from jinja2 import Environment, FileSystemLoader, Template
 import tomlkit
+from jinja2 import Environment, FileSystemLoader, Template
+
 import mistune
 
 ROOT_DIR = "."
@@ -13,7 +14,7 @@ PAGE_DIR = "pages"
 POST_DIR = "posts"
 
 
-def read_file(path: pathlib.Path) -> str:
+def read_file(path: Union[pathlib.Path, str]) -> str:
     with open(path) as f:
         return f.read()
 
@@ -29,22 +30,13 @@ def get_template(template_path: pathlib.Path, filename: str) -> Template:
     return template
 
 
-def get_pages(pages_path: pathlib.Path) -> List:
-    page_names = os.listdir(pages_path)
-    pages = []
-    for page in page_names:
-        path = pages_path / page
+def get_markdowns(parent: pathlib.Path) -> List:
+    markdowns = []
+    for child in os.listdir(parent):
+        path = parent / child
         if str(path).endswith(".md"):
-            pages.append(path)
-    return pages
-
-
-def get_posts(posts_path: pathlib.Path) -> List:
-    _posts = os.listdir(posts_path)
-    posts = []
-    for post in _posts:
-        posts.append(posts_path / post)
-    return posts
+            markdowns.append(path)
+    return markdowns
 
 
 def parse_markdown(markdown_path: pathlib.Path) -> Tuple[Optional[Dict], str]:
@@ -66,6 +58,34 @@ def dump_html(dest_dir: pathlib.Path, content: str, filename: str) -> None:
         f.write(str(content))
 
 
+def generate(
+    paths: List,
+    config: Dict,
+    template: Template,
+    dest_dir: pathlib.Path,
+    menus: List,
+    dirname: str = None,
+    post_links: List = None,
+) -> None:
+    for path in paths:
+        name, ext = path.name.split(".md")
+        metadata, body = parse_markdown(path)
+        if name != "index":
+            post_links = {}
+        context = {
+            "site_metadata": config["metadata"],
+            "metadata": metadata,
+            "body": body,
+            "menus": menus,
+            "post_links": post_links,
+        }
+        html = template.render(**context)
+        outfile = f"{name}.html"
+        if dirname:
+            outfile = os.path.join(dirname, outfile)
+        dump_html(dest_dir, html, outfile)
+
+
 def main() -> None:
     config = parse_config("config.toml")
 
@@ -76,21 +96,23 @@ def main() -> None:
     pages_dir = root_dir / pathlib.Path(dirs.get("pages", PAGE_DIR))
     posts_dir = root_dir / pathlib.Path(dirs.get("posts", POST_DIR))
 
-    template = get_template(template_dir.resolve(), "index.j2")
+    page_template = get_template(template_dir.resolve(), "page.j2")
+    post_template = get_template(template_dir.resolve(), "post.j2")
 
-    markdowns = get_pages(pages_dir)
-    posts = get_posts(posts_dir)
-    markdowns.extend(posts)
-    for md in markdowns:
-        name, ext = md.name.split(".md")
-        metadata, body = parse_markdown(md)
-        context = {
-            "site_metadata": config["metadata"],
-            "metadata": metadata,
-            "body": body,
-        }
-        html = template.render(**context)
-        dump_html(dest_dir, html, f"{name}.html")
+    pages = get_markdowns(pages_dir)
+    menus = [p.name[:-3] for p in pages]
+
+    posts = get_markdowns(posts_dir)
+    post_links = {}
+    for post in posts:
+        metadata, _ = parse_markdown(post)
+        post_links[post.name.replace(".md", ".html")] = metadata["title"]
+    output_post_dir = dest_dir / "posts"
+    if not output_post_dir.exists():
+        os.mkdir(output_post_dir)
+
+    generate(pages, config, page_template, dest_dir, menus, post_links=post_links)
+    generate(posts, config, post_template, dest_dir, menus, dirname="posts")
 
 
 if __name__ == "__main__":

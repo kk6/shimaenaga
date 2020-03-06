@@ -3,6 +3,7 @@ title = "Site title"
 language_code = "ja"
 charset = "UTF-8"
 viewport = "width=device-width, initial-scale=1.0"
+copyright = "All copyrights reserved © 2020 kk6"
 
 [directory]
 root = "."

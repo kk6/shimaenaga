@@ -1,0 +1,39 @@
+{% extends 'base.j2' %} {% block css %}
+<link rel="stylesheet" href="../../css/normalize.css" />
+<link rel="stylesheet" href="../../css/skeleton.css" />
+<link
+  href="https://fonts.googleapis.com/css?family=Noto+Sans+JP"
+  rel="stylesheet"
+/>
+
+<link rel="stylesheet" href="../../css/style.css" />
+{% endblock css %} {% block header %}
+<div class="container">
+  <header>
+    <h1 class="site-title">
+      <a href="index.html">{{ site_metadata.title }}</a>
+    </h1>
+    <ul>
+      {% for menu in menus %}
+      <li>
+        <a href="{{ menu }}.html">{{ menu }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </header>
+</div>
+{% endblock header %} {% block content%}
+<div class="container">
+  <h1>{{ metadata.title }}</h1>
+
+  {{ body }}
+
+  <ul>
+    {% for link, title in post_links.items() %}
+    <li>
+      <a href="posts/{{ link }}">{{ title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}

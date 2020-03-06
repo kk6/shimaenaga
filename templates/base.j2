@@ -4,6 +4,7 @@
     <meta charset="{{ site_metadata.charset }}" />
     <meta name="viewport" content="{{ site_metadata.viewport }}" />
     <title>{{ site_metadata.title }}</title>
+    {% block css %}
     <link rel="stylesheet" href="../css/normalize.css" />
     <link rel="stylesheet" href="../css/skeleton.css" />
     <link
@@ -12,14 +13,16 @@
     />
 
     <link rel="stylesheet" href="../css/style.css" />
+    {% endblock css %}
   </head>
   <body class="wf-notosansjapanese">
-    <div class="container">
-      <header>
-        <h1 class="site-title">{{ site_metadata.title }}</h1>
-      </header>
-    </div>
+    {% block header %} {% endblock header %}
     <hr />
     {% block content %} {% endblock content %}
+    <footer class="footer">
+      <div class="container">
+        <p>{{ site_metadata.copyright }}</p>
+      </div>
+    </footer>
   </body>
 </html>

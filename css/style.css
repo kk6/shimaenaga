@@ -5,6 +5,12 @@
   margin-top: 3rem;
 }
 
+.footer {
+  padding-top: 3rem;
+  text-align: right;
+  background-color: #f7f7f7;
+}
+
 /*
  * CSS tags
  * https://codepen.io/wbeeftink/pen/dIaDH
