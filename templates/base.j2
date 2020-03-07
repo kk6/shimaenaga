@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ site_metadata.language_code }}">
   <head>
-    <meta charset="{{ site_metadata.charset }}" />
-    <meta name="viewport" content="{{ site_metadata.viewport }}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ site_metadata.title }}</title>
     {% block css %}
     <link rel="stylesheet" href="../css/normalize.css" />
@@ -21,7 +21,9 @@
     {% block content %} {% endblock content %}
     <footer class="footer">
       <div class="container">
-        <p>{{ site_metadata.copyright }}</p>
+        <p>
+          © {{ site_metadata.year_of_publication }} {{ site_metadata.author }}
+        </p>
       </div>
     </footer>
   </body>
