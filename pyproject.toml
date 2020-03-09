@@ -18,8 +18,11 @@ taskipy = "^1.1.3"
 flake8 = "^3.7.9"
 pytest = "^5.3.5"
 
+[tool.poetry.scripts]
+shimaenaga = "shimaenaga.cli:app"
+
 [tool.taskipy.tasks]
-build = "python -m shimaenaga build"
+build = "poetry run shimaenaga build"
 test = "pytest tests"
 lint = "flake8 shimaenaga/"
 typecheck = "mypy shimaenaga/"
