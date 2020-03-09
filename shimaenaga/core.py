@@ -65,7 +65,7 @@ def generate(
     dest_dir: pathlib.Path,
     menus: List,
     dirname: str = None,
-    post_links: List = None,
+    post_links: Dict = None,
 ) -> None:
     for path in paths:
         name, ext = path.name.split(".md")
@@ -106,10 +106,10 @@ def main() -> None:
     post_links = {}
     for post in posts:
         metadata, _ = parse_markdown(post)
-        post_links[post.name.replace(".md", ".html")] = metadata["title"]
+        post_links[post.name.replace(".md", ".html")] = metadata["title"]  # type: ignore
     output_post_dir = dest_dir / "posts"
     if not output_post_dir.exists():
-        os.mkdir(output_post_dir)
+        os.makedirs(output_post_dir)
 
     generate(pages, config, page_template, dest_dir, menus, post_links=post_links)
     generate(posts, config, post_template, dest_dir, menus, dirname="posts")

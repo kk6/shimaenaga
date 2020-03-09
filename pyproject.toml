@@ -10,6 +10,7 @@ python = "^3.8"
 jinja2 = "^2.11.1"
 tomlkit = "^0.5.11"
 mistune = {git = "https://github.com/lepture/mistune"}
+typer = "^0.0.8"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.761"
@@ -18,10 +19,10 @@ flake8 = "^3.7.9"
 pytest = "^5.3.5"
 
 [tool.taskipy.tasks]
-build = "python shimaenaga.py"
+build = "python -m shimaenaga build"
 test = "pytest tests"
-lint = "flake8 shimaenaga.py"
-typecheck = "mypy shimaenaga.py"
+lint = "flake8 shimaenaga/"
+typecheck = "mypy shimaenaga/"
 format-html = "prettier dest/* --write"
 chirp = "task build && task format-html"
 
