@@ -2,7 +2,7 @@ from textwrap import dedent
 import pathlib
 
 
-def generate_template(dir: pathlib.Path, title: str, filename: str) -> str:
+def generate_markdown_template(dir: pathlib.Path, title: str, filename: str) -> str:
     text = dedent(f"""\
     +++
     title = "{title}"

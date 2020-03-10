@@ -1,0 +1,7 @@
+theme = "simple"
+
+[metadata]
+title = "Site title"
+author = "yourname"
+language_code = "en"
+year_of_publication = 2020

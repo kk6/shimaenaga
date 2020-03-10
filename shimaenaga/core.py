@@ -1,27 +1,19 @@
 import os
 import pathlib
-from typing import Dict, List, Optional, Tuple, Union
+import shutil
+from typing import Dict, List, Optional, Tuple
 
 import tomlkit
 from jinja2 import Environment, FileSystemLoader, Template
 
 import mistune
 
-ROOT_DIR = "."
-TEMPLATE_DIR = "templates"
-DEST_DIR = "dest"
-PAGE_DIR = "pages"
-POST_DIR = "posts"
+from .config import parse_config
+from .files import read_file
 
 
-def read_file(path: Union[pathlib.Path, str]) -> str:
-    with open(path) as f:
-        return f.read()
-
-
-def parse_config(config_file: str) -> Dict:
-    toml = read_file(config_file)
-    return tomlkit.parse(toml)
+ROOT_DIR = pathlib.Path(".")
+THEMES_DIR = pathlib.Path(__file__).parent / "themes"
 
 
 def get_template(template_path: pathlib.Path, filename: str) -> Template:
@@ -86,15 +78,22 @@ def generate(
         dump_html(dest_dir, html, outfile)
 
 
+def copy_assets(source_assets_dir: pathlib.Path, dest_dir: pathlib.Path) -> None:
+    dest_assets_dir = dest_dir / "assets"
+    if dest_assets_dir.exists():
+        shutil.rmtree(dest_assets_dir)
+    shutil.copytree(source_assets_dir, dest_assets_dir)
+
+
 def main() -> None:
     config = parse_config("config.toml")
 
-    dirs = config["directory"]
-    root_dir = pathlib.Path(dirs.get("root", ROOT_DIR))
-    template_dir = root_dir / pathlib.Path(dirs.get("templates", TEMPLATE_DIR))
-    dest_dir = root_dir / pathlib.Path(dirs.get("dest", DEST_DIR))
-    pages_dir = root_dir / pathlib.Path(dirs.get("pages", PAGE_DIR))
-    posts_dir = root_dir / pathlib.Path(dirs.get("posts", POST_DIR))
+    theme = config.get("theme")
+
+    template_dir = THEMES_DIR / theme / "templates"
+    pages_dir = ROOT_DIR / "pages"
+    posts_dir = ROOT_DIR / "posts"
+    dest_dir = ROOT_DIR / "dest"
 
     page_template = get_template(template_dir.resolve(), "page.j2")
     post_template = get_template(template_dir.resolve(), "post.j2")
@@ -114,6 +113,5 @@ def main() -> None:
     generate(pages, config, page_template, dest_dir, menus, post_links=post_links)
     generate(posts, config, post_template, dest_dir, menus, dirname="posts")
 
-
-if __name__ == "__main__":
-    main()
+    source_assets_dir = THEMES_DIR / theme / "assets"
+    copy_assets(source_assets_dir, dest_dir)
