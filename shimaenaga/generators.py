@@ -4,7 +4,9 @@ import pathlib
 from .files import write_file
 
 
-def generate_markdown_template(dir: pathlib.Path, title: str, filename: str) -> pathlib.Path:
+def generate_markdown_template(
+    dir: pathlib.Path, title: str, filename: str
+) -> pathlib.Path:
     text = dedent(
         f"""\
     +++
