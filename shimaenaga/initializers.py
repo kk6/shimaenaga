@@ -8,7 +8,7 @@ def initialize(config: Config) -> None:
     create_directories()
 
 
-def create_directories():
+def create_directories() -> None:
     for dirname in ("pages", "posts"):
         if not os.path.exists(dirname):
             os.mkdir(dirname)

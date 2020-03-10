@@ -13,10 +13,15 @@ app = typer.Typer()
 def init(
     site_title: str = typer.Option(dc.sitemeta.title, prompt="What's your site title?"),
     author: str = typer.Option(dc.sitemeta.author, prompt="What's your name?"),
-    language_code: str = typer.Option(dc.sitemeta.language_code, prompt="Language code?"),
-):
+    language_code: str = typer.Option(
+        dc.sitemeta.language_code, prompt="Language code?"
+    ),
+) -> None:
     """Initialize new site"""
-    config = Config(theme=dc.theme, sitemeta=SiteMeta(title=site_title, author=author, language_code=language_code))
+    config = Config(
+        theme=dc.theme,
+        sitemeta=SiteMeta(title=site_title, author=author, language_code=language_code),
+    )
     initialize(config)
     typer.echo("New site initial setup complete✨")
 

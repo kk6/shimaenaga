@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ site_metadata.language_code }}">
+<html lang="{{ sitemeta.language_code }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ site_metadata.title }}</title>
+    <title>{{ sitemeta.title }}</title>
     {% block css %}
     <link rel="stylesheet" href="assets/css/normalize.css" />
     <link rel="stylesheet" href="assets/css/skeleton.css" />
@@ -21,9 +21,7 @@
     {% block content %} {% endblock content %}
     <footer class="footer">
       <div class="container">
-        <p>
-          © {{ site_metadata.year_of_publication }} {{ site_metadata.author }}
-        </p>
+        <p>© {{ sitemeta.year_of_publication }} {{ sitemeta.author }}</p>
       </div>
     </footer>
   </body>

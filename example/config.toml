@@ -1,6 +1,6 @@
 theme = "simple"
 
-[metadata]
+[sitemeta]
 title = "Site title"
 author = "yourname"
 language_code = "en"

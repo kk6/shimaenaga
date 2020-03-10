@@ -8,7 +8,7 @@ from jinja2 import Environment, FileSystemLoader, Template
 
 import mistune
 
-from .config import parse_config
+from .config import parse_config, Config
 from .files import read_file
 
 
@@ -52,7 +52,7 @@ def dump_html(dest_dir: pathlib.Path, content: str, filename: str) -> None:
 
 def generate(
     paths: List,
-    config: Dict,
+    config: Config,
     template: Template,
     dest_dir: pathlib.Path,
     menus: List,
@@ -65,7 +65,7 @@ def generate(
         if name != "index":
             post_links = {}
         context = {
-            "site_metadata": config["metadata"],
+            "sitemeta": config.sitemeta,
             "metadata": metadata,
             "body": body,
             "menus": menus,
@@ -88,7 +88,7 @@ def copy_assets(source_assets_dir: pathlib.Path, dest_dir: pathlib.Path) -> None
 def main() -> None:
     config = parse_config("config.toml")
 
-    theme = config.get("theme")
+    theme = config.theme
 
     template_dir = THEMES_DIR / theme / "templates"
     pages_dir = ROOT_DIR / "pages"
