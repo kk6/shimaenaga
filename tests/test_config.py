@@ -23,7 +23,7 @@ class TestParseConfig:
             year_of_publication = 2020
             """
         )
-        return dedent(s)
+        return s
 
     def test_it(self, target, toml):
         with mock.patch("shimaenaga.config.read_file", return_value=toml):

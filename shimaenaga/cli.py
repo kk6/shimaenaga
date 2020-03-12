@@ -1,8 +1,8 @@
+import datetime
 import pathlib
 import typer
-from .core import main
-from .generators import generate_markdown_template
-from .initializers import initialize
+from .generators import generate_markdown_template, generate_article_template
+from .initializer import initialize
 from .config import default_config as dc
 from .config import Config, SiteMeta
 
@@ -27,16 +27,27 @@ def init(
 
 
 @app.command()
-def new(filename: str, title: str = "New title") -> None:
+def new(filename: str, title: str = "New title", page: bool = False) -> None:
     """Create new page from template"""
-    dirname = pathlib.Path("./posts")
-    path = generate_markdown_template(dirname, title, filename)
+    if page:
+        dirname = pathlib.Path("./pages")
+        path = generate_markdown_template(dirname, title, filename)
+    else:
+        local_time = datetime.date.today()
+        dirname = pathlib.Path(".")
+        path = generate_article_template(dirname, title, filename, local_time)
     typer.echo(f"New markdown file created at {path}")
 
 
 @app.command()
 def build() -> None:
-    """Build site"""
-    typer.echo(f"Building...")
-    main()
+    """Build project"""
+    from .project import Project
+    from .config import parse_config
+
+    typer.echo(f"Load config file")
+    config = parse_config("config.toml")
+    typer.echo(f"Build start")
+    project = Project(config)
+    project.build()
     typer.echo(f"Build finished!")

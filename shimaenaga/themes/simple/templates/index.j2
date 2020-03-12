@@ -15,7 +15,14 @@
 </div>
 {% endblock header %} {% block content%}
 <div class="container">
-  <h1>{{ page_title }}</h1>
   {{ body }}
+
+  <ul>
+    {% for link, title in current_articles.items() %}
+    <li>
+      <a href="{{ link }}">{{ title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock content %}
