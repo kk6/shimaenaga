@@ -23,7 +23,7 @@ def init(
         sitemeta=SiteMeta(title=site_title, author=author, language_code=language_code),
     )
     initialize(config)
-    typer.echo("New site initial setup complete✨")
+    typer.echo("New site initial setup complete ✨")
 
 
 @app.command()

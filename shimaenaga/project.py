@@ -50,6 +50,7 @@ class Project:
                 "sitemeta": self.config.sitemeta,
                 "menus": self.get_menus(),
                 "page_title": page.title,
+                "body": page.body,
             }
             html = self.renderer.render("page", context)
             write_file(self.dest_dir / f"{page.name}.html", html)
@@ -61,6 +62,7 @@ class Project:
                 "menus": self.get_menus(),
                 "article_title": article.title,
                 "tags": article.tags,
+                "body": article.body,
             }
             html = self.renderer.render("article", context)
             dest_article_dir = self.dest_dir / article.path.parent
