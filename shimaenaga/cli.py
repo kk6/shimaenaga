@@ -1,6 +1,7 @@
 import datetime
 import pathlib
 import typer
+from loguru import logger
 from .generators import generate_markdown_template, generate_article_template
 from .initializer import initialize
 from .config import default_config as dc
@@ -45,9 +46,8 @@ def build() -> None:
     from .project import Project
     from .config import parse_config
 
-    typer.echo(f"Load config file")
+    logger.info("Building project...")
     config = parse_config("config.toml")
-    typer.echo(f"Build start")
     project = Project(config)
     project.build()
-    typer.echo(f"Build finished!")
+    logger.success("Build completed")
