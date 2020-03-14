@@ -15,6 +15,7 @@ class Jinja2Renderer:
                 encoding=encoding,
             ),
         )
+        self.env.globals["ROOT"] = "/"
         self.ext = ext
 
     def _load_layout(self, name: str) -> Template:

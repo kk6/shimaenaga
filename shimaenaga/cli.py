@@ -2,6 +2,7 @@ import datetime
 import pathlib
 import typer
 from loguru import logger
+from livereload import Server
 from .generators import generate_markdown_template, generate_article_template
 from .initializer import initialize
 from .config import default_config as dc
@@ -51,3 +52,13 @@ def build() -> None:
     project = Project(config)
     project.build()
     logger.success("Build completed")
+
+
+@app.command()
+def serve() -> None:
+    server = Server()
+    logger.info("Starting live-reload...")
+    server.watch("articles/", "poetry run shimaenaga build")
+    server.watch("pages/", "poetry run shimaenaga build")
+    server.watch("config.toml", "poetry run shimaenaga build")
+    server.serve(root="dest")

@@ -1,19 +1,4 @@
-{% extends 'base.j2' %} {% block header %}
-<div class="container">
-  <header>
-    <h1 class="site-title">
-      <a href="index.html">{{ sitemeta.title }}</a>
-    </h1>
-    <ul>
-      {% for menu in menus %}
-      <li>
-        <a href="{{ menu }}.html">{{ menu }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </header>
-</div>
-{% endblock header %} {% block content%}
+{% extends 'base.j2' %} {% block content%}
 <div class="container">
   {{ body }}
 

@@ -5,18 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ sitemeta.title }}</title>
     {% block css %}
-    <link rel="stylesheet" href="assets/css/normalize.css" />
-    <link rel="stylesheet" href="assets/css/skeleton.css" />
+    <link rel="stylesheet" href="{{ ROOT }}assets/css/normalize.css" />
+    <link rel="stylesheet" href="{{ ROOT }}assets/css/skeleton.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Noto+Sans+JP"
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="{{ ROOT }}assets/css/style.css" />
     {% endblock css %}
   </head>
   <body class="wf-notosansjapanese">
-    {% block header %} {% endblock header %}
+    {% block header %}
+    <div class="container">
+      <header>
+        <h1 class="site-title">
+          <a href="{{ ROOT }}index.html">{{ sitemeta.title }}</a>
+        </h1>
+        <ul>
+          {% for menu in menus %}
+          <li>
+            <a href="{{ ROOT }}{{ menu }}.html">{{ menu }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </header>
+    </div>
+    {% endblock header %}
     <hr />
     {% block content %} {% endblock content %}
     <footer class="footer">
