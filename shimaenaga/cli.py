@@ -7,6 +7,8 @@ from .generators import generate_markdown_template, generate_article_template
 from .initializer import initialize
 from .config import default_config as dc
 from .config import Config, SiteMeta
+from .project import Project
+from .config import parse_config
 
 app = typer.Typer()
 
@@ -44,9 +46,6 @@ def new(filename: str, title: str = "New title", page: bool = False) -> None:
 @app.command()
 def build() -> None:
     """Build project"""
-    from .project import Project
-    from .config import parse_config
-
     logger.info("Building project...")
     config = parse_config("config.toml")
     project = Project(config)
@@ -58,7 +57,7 @@ def build() -> None:
 def serve() -> None:
     server = Server()
     logger.info("Starting live-reload...")
-    server.watch("articles/", "poetry run shimaenaga build")
-    server.watch("pages/", "poetry run shimaenaga build")
-    server.watch("config.toml", "poetry run shimaenaga build")
+    server.watch("articles/", build)
+    server.watch("pages/", build)
+    server.watch("config.toml", build)
     server.serve(root="dest")
