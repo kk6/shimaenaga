@@ -1,14 +1,16 @@
 import datetime
 import pathlib
+
 import typer
-from loguru import logger
 from livereload import Server
+from loguru import logger
+
+from .config import Config, SiteMeta
+from .config import default_config as dc
+from .config import parse_config
 from .generators import generate_markdown_template, generate_article_template
 from .initializer import initialize
-from .config import default_config as dc
-from .config import Config, SiteMeta
 from .project import Project
-from .config import parse_config
 
 app = typer.Typer()
 

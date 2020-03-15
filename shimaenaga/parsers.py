@@ -1,9 +1,10 @@
 import pathlib
 from typing import Tuple, Dict
-from .files import read_file
 
 import mistune
 import tomlkit
+
+from .files import read_file
 
 
 def parse_markdown(markdown_path: pathlib.Path) -> Tuple[Dict, str]:

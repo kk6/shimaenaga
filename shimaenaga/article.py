@@ -1,5 +1,5 @@
-from dataclasses import dataclass
 import pathlib
+from dataclasses import dataclass
 from typing import List
 
 from .parsers import parse_markdown

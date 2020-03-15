@@ -1,15 +1,15 @@
 import os
 import pathlib
-from typing import List
 import shutil
+from typing import List
 
 from loguru import logger
 
-from .renderers import Jinja2Renderer
-from .files import write_file
-from .page import load_pages
 from .article import load_articles, Article
 from .config import Config
+from .files import write_file
+from .page import load_pages
+from .renderers import Jinja2Renderer
 
 
 class Project:
