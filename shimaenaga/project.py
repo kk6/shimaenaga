@@ -92,7 +92,7 @@ class Project:
         shutil.copytree(source_assets_dir, dest_assets_dir)
 
     def copy_article_images(self, article: Article, dest: pathlib.Path) -> None:
-        images = []
+        images: List = []
         glob_patterns = ["*.jpg", "*.jpeg", "*.png", "*.svg"]
         for pattern in glob_patterns:
             images.extend(article.path.parent.glob(pattern))
