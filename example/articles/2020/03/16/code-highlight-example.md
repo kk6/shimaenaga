@@ -1,10 +1,16 @@
++++
+title = "Code highlight example"
+date = "2020/03/16"
+tags = []
++++
+
+Write your article here.
+
+```python
 import pathlib
 from dataclasses import dataclass
 import datetime
 from typing import List
-
-import mistune
-from html5lib_truncation import truncate_html
 
 from .parsers import parse_markdown
 
@@ -20,17 +26,6 @@ class Article:
     @property
     def name(self) -> str:
         return self.path.name[:-3]
-
-    @property
-    def display_date(self) -> str:
-        return self.date.strftime("%b %d, %Y")
-
-    @property
-    def html(self) -> str:
-        return mistune.html(self.body)
-
-    def summarize_html(self, length: int = 150) -> str:
-        return truncate_html(self.html, length, end="...")
 
 
 def load_articles(articles_dir: pathlib.Path) -> List[Article]:
@@ -50,3 +45,4 @@ def load_article(path: pathlib.Path) -> Article:
         body,
         metadata["tags"],
     )
+```

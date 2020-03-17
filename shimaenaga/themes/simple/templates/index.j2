@@ -1,13 +1,26 @@
 {% extends 'base.j2' %} {% block content%}
-<div class="container">
-  {{ body }}
-
-  <ul>
-    {% for link, title in current_articles.items() %}
-    <li>
-      <a href="{{ link }}">{{ title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+<div class="container is-full-screen">
+  {% for link, article in current_articles.items() %}
+  <article class="article">
+    <date datetime="{{ article.date }}">{{
+      article.date.strftime("%b %d, %Y")
+    }}</date>
+    <a href="{{ link }}">
+      <h1>{{ article.title }}</h1>
+    </a>
+    <p>
+      {% for tag in article.tags %}
+      <span class="tag is-small">{{ tag }}</span>
+      {% endfor %}
+    </p>
+    <br />
+    {{ article.summarize_html(500) }}
+    <div class="is-right">
+      <a class="button outline" href="{{ link }}">
+        Read more
+      </a>
+    </div>
+  </article>
+  {% endfor %}
 </div>
 {% endblock content %}

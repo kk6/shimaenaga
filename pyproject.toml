@@ -13,6 +13,7 @@ mistune = {git = "https://github.com/lepture/mistune"}
 typer = "^0.0.8"
 loguru = "^0.4.1"
 livereload = "^2.6.1"
+html5lib-truncation = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.761"

@@ -1,16 +1,19 @@
 {% extends 'base.j2' %} {% block content%}
-<div class="container">
-  <h1>{{ article_title }}</h1>
-  {% if tags %}
-  <ul class="tags">
-    {% for tag in tags %}
-    <li>
-      <a class="tag">{{ tag }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-
-  {{ body }}
+<div class="container is-full-screen">
+  <article class="article">
+    <header class="header">
+      <date datetime="{{ article.date }}">
+        {{ article.display_date }}
+      </date>
+      <h1>{{ article.title }}</h1>
+      <p>
+        {% for tag in article.tags %}
+        <span class="tag is-small">{{ tag }}</span>
+        {% endfor %}
+      </p>
+    </header>
+    <br />
+    {{ article.html }}
+  </article>
 </div>
 {% endblock content %}

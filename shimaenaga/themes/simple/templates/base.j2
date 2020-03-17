@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ sitemeta.title }}</title>
     {% block css %}
-    <link rel="stylesheet" href="{{ ROOT }}assets/css/normalize.css" />
-    <link rel="stylesheet" href="{{ ROOT }}assets/css/skeleton.css" />
+    <link rel="stylesheet" href="{{ ROOT }}assets/css/chota.min.css" />
     <link
-      href="https://fonts.googleapis.com/css?family=Noto+Sans+JP"
+      href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300&display=swap"
       rel="stylesheet"
     />
 
@@ -16,23 +15,26 @@
     {% endblock css %}
   </head>
   <body class="wf-notosansjapanese">
-    {% block header %}
     <div class="container">
-      <header>
-        <h1 class="site-title">
-          <a href="{{ ROOT }}index.html">{{ sitemeta.title }}</a>
-        </h1>
-        <ul>
-          {% for menu in menus %}
-          <li>
-            <a href="{{ ROOT }}{{ menu }}.html">{{ menu }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-      </header>
+      <section class="section">
+        <nav class="nav">
+          <div class="nav-center">
+            <a class="brand" href="{{ ROOT }}index.html">
+              <h1>{{ sitemeta.title }}</h1>
+            </a>
+          </div>
+        </nav>
+        <nav class="nav">
+          <div class="nav-center">
+            <div class="tabs">
+              {% for menu in menus %}
+              <a href="{{ ROOT }}{{ menu }}.html">{{ menu }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </nav>
+      </section>
     </div>
-    {% endblock header %}
-    <hr />
     {% block content %} {% endblock content %}
     <footer class="footer">
       <div class="container">
