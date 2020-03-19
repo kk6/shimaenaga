@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:300&display=swap"
       rel="stylesheet"
     />
+    <link href="{{ ROOT }}assets/css/prism.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ ROOT }}assets/css/style.css" />
     {% endblock css %}
@@ -38,8 +39,11 @@
     {% block content %} {% endblock content %}
     <footer class="footer">
       <div class="container">
-        <p>© {{ sitemeta.year_of_publication }} {{ sitemeta.author }}</p>
+        <div class="is-center">
+          <p>© {{ sitemeta.year_of_publication }} {{ sitemeta.author }}</p>
+        </div>
       </div>
     </footer>
+    <script src="{{ ROOT }}assets/js/prism.js"></script>
   </body>
 </html>
