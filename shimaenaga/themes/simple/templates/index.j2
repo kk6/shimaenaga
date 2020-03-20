@@ -2,9 +2,7 @@
 <div class="container is-full-screen">
   {% for link, article in current_articles.items() %}
   <article class="article">
-    <date datetime="{{ article.date }}">{{
-      article.date.strftime("%b %d, %Y")
-    }}</date>
+    <date datetime="{{ article.date_obj }}">{{ article.display_date }}</date>
     <a href="{{ link }}">
       <h1>{{ article.title }}</h1>
     </a>

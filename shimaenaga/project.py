@@ -5,10 +5,9 @@ from typing import List
 
 from loguru import logger
 
-from .article import load_articles, Article
 from .config import Config
+from .contents import load_contents, Content, Article
 from .files import write_file
-from .page import load_pages
 from .renderers import Jinja2Renderer
 
 
@@ -21,8 +20,8 @@ class Project:
         self.articles_dir = self.root_dir / "articles"
         self.dest_dir = self.root_dir / "dest"
 
-        self.pages = load_pages(self.pages_dir)
-        self.articles = load_articles(self.articles_dir)
+        self.pages = load_contents(self.pages_dir, Content)
+        self.articles = load_contents(self.articles_dir, Article)
 
     def build(self) -> None:
         if not os.path.exists(self.dest_dir):
