@@ -1,6 +1,6 @@
 +++
 title = "Image example"
-date = "2020/03/13"
+date = "2020-03-13"
 tags = ["image", "japanese"]
 +++
 

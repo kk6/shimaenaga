@@ -1,10 +1,10 @@
 import pathlib
-from dataclasses import dataclass
 import datetime
 from typing import List, Type
 
 import mistune
 from html5lib_truncation import truncate_html
+from pydantic.dataclasses import dataclass
 
 from .parsers import parse_markdown
 
@@ -28,17 +28,13 @@ class Content:
 class Article(Content):
     path: pathlib.Path
     title: str
-    date: str
+    date: datetime.date
     body: str
     tags: List[str]
 
     @property
     def display_date(self) -> str:
-        return self.date_obj.strftime("%b %d, %Y")
-
-    @property
-    def date_obj(self) -> datetime.datetime:
-        return datetime.datetime.strptime(self.date, "%Y/%m/%d")
+        return self.date.strftime("%b %d, %Y")
 
     def summarize_html(self, length: int = 150) -> str:
         return truncate_html(self.html, length, end="...")
@@ -58,4 +54,4 @@ def load_content(path: pathlib.Path, content_class: Type[Content]) -> Content:
 
 
 def sort_articles(articles: List[Article]) -> List[Article]:
-    return sorted(articles, key=lambda a: a.date_obj, reverse=True)
+    return sorted(articles, key=lambda a: a.date, reverse=True)

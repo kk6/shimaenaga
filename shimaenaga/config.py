@@ -1,6 +1,7 @@
-from dataclasses import dataclass, field
+from dataclasses import field
 from datetime import date
 
+from pydantic.dataclasses import dataclass
 import tomlkit
 
 from .files import read_file, write_file

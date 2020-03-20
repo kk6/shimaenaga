@@ -1,6 +1,6 @@
 +++
 title = "Long text example"
-date = "2020/03/16"
+date = "2020-03-16"
 tags = []
 +++
 

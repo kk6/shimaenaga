@@ -35,7 +35,7 @@ def generate_article_template(
         f"""\
     +++
     title = "{title}"
-    date = "{dt.year}/{dt.month:0>2}/{dt.day:0>2}"
+    date = "{dt.strftime('%Y-%m-%d')}"
     tags = []
     +++
 
