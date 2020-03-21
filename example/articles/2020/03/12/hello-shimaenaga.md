@@ -1,7 +1,7 @@
 +++
-title = "Hello Shimaenaga!"
-date = "2020-03-12"
-tags = []
+title = "Hello shimaenaga!"
+date = 2020-03-21
+tags = ["python", "hello-world"]
 +++
 
-Write your article here.
+It's my first entry.
