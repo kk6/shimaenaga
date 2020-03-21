@@ -3,7 +3,7 @@
   {% for article in page.contents%}
   <article class="article">
     <date datetime="{{ article.date_obj }}">{{ article.display_date }}</date>
-    <a href="{{ article.url }}">
+    <a href="{{ ROOT }}{{ article.url }}">
       <h1>{{ article.title }}</h1>
     </a>
     <p>
@@ -14,7 +14,7 @@
     <br />
     {{ article.summarize_html(500) }}
     <div class="is-right">
-      <a class="button outline" href="{{ article.url }}">
+      <a class="button outline" href="{{ ROOT }}{{ article.url }}">
         Read more
       </a>
     </div>
