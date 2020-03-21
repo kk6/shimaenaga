@@ -1,9 +1,9 @@
 {% extends 'base.j2' %} {% block content%}
 <div class="container is-full-screen">
-  {% for link, article in current_articles.items() %}
+  {% for article in page.contents%}
   <article class="article">
     <date datetime="{{ article.date_obj }}">{{ article.display_date }}</date>
-    <a href="{{ link }}">
+    <a href="{{ article.url }}">
       <h1>{{ article.title }}</h1>
     </a>
     <p>
@@ -19,6 +19,18 @@
       </a>
     </div>
   </article>
-  {% endfor %}
+  {% endfor %} {% if page.prev_page and page.prev_page == 1%}
+  <a class="button outline" href="{{ ROOT }}index.html">
+    Prev page
+  </a>
+  {% elif page.prev_page %}
+  <a class="button outline" href="{{ ROOT }}page/{{ page.prev_page }}.html">
+    Prev page
+  </a>
+  {% endif %} {% if page.next_page %}
+  <a class="button outline" href="{{ ROOT }}page/{{ page.next_page }}.html">
+    Next page
+  </a>
+  {% endif %}
 </div>
 {% endblock content %}

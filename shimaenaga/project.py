@@ -6,9 +6,10 @@ from typing import List
 from loguru import logger
 
 from .config import Config
-from .contents import load_contents, Content, Article
+from .contents import load_contents, Content, Article, sort_articles
 from .files import write_file
 from .renderers import Jinja2Renderer
+from .paginator import Paginator
 
 
 class Project:
@@ -21,7 +22,7 @@ class Project:
         self.dest_dir = self.root_dir / "dest"
 
         self.pages = load_contents(self.pages_dir, Content)
-        self.articles = load_contents(self.articles_dir, Article)
+        self.articles = sort_articles(load_contents(self.articles_dir, Article))
 
     def build(self) -> None:
         if not os.path.exists(self.dest_dir):
@@ -37,18 +38,22 @@ class Project:
         logger.info("Copy of assets succeeded.")
 
     def build_index_page(self) -> None:
-        current_articles = {}
-        for article in self.articles:
-            link = article.path.with_suffix(".html")
-            current_articles[link] = article
-
-        context = {
-            "sitemeta": self.config.sitemeta,
-            "menus": self.get_menus(),
-            "current_articles": current_articles,
-        }
-        html = self.renderer.render("index", context)
-        write_file(self.dest_dir / "index.html", html)
+        paginator = Paginator(self.articles, self.config.sitemeta.per_page)
+        for page in paginator.paginate():
+            context = {
+                "sitemeta": self.config.sitemeta,
+                "menus": self.get_menus(),
+                "articles": self.articles,
+                "paginator": paginator,
+                "page": page,
+            }
+            html = self.renderer.render("index", context)
+            if page.current_page == 1:
+                write_file(self.dest_dir / "index.html", html)
+            else:
+                if not os.path.exists(self.dest_dir / "page"):
+                    os.mkdir(self.dest_dir / "page")
+                write_file(self.dest_dir / "page" / f"{page.current_page}.html", html)
 
     def build_pages(self) -> None:
         for page in self.pages:

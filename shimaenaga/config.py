@@ -13,6 +13,7 @@ class SiteMeta:
     author: str = "yourname"
     language_code: str = "en"
     year_of_publication: int = field(default_factory=lambda: date.today().year)
+    per_page: int = 5
 
 
 @dataclass

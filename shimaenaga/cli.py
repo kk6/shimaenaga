@@ -22,11 +22,12 @@ def init(
     language_code: str = typer.Option(
         dc.sitemeta.language_code, prompt="Language code?"
     ),
+    per_page: int = typer.Option(dc.sitemeta.per_page, prompt="How many articles per page?"),
 ) -> None:
     """Initialize new site"""
     config = Config(
         theme=dc.theme,
-        sitemeta=SiteMeta(title=site_title, author=author, language_code=language_code),
+        sitemeta=SiteMeta(title=site_title, author=author, language_code=language_code, per_page=per_page),
     )
     initialize(config)
     typer.echo("New site initial setup complete ✨")
