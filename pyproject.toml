@@ -8,7 +8,7 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.8"
 jinja2 = "^2.11.1"
-tomlkit = "^0.5.11"
+tomlkit = "^0.6.0"
 mistune = {git = "https://github.com/lepture/mistune"}
 typer = "^0.1.1"
 loguru = "^0.4.1"
