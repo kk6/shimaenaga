@@ -12,7 +12,7 @@ tomlkit = "^0.6.0"
 mistune = {git = "https://github.com/lepture/mistune"}
 typer = "^0.1.1"
 loguru = "^0.5.1"
-livereload = "^2.6.1"
+livereload = "^2.6.2"
 html5lib-truncation = "^0.1.0"
 pydantic = "^1.5"
 
