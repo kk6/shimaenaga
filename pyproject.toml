@@ -17,7 +17,7 @@ html5lib-truncation = "^0.1.0"
 pydantic = "^1.5"
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.770"
+mypy = "^0.782"
 taskipy = "^1.2.1"
 flake8 = "^3.8.3"
 pytest = "^5.4.3"
