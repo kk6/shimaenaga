@@ -14,7 +14,7 @@ typer = "^0.3.0"
 loguru = "^0.5.1"
 livereload = "^2.6.2"
 html5lib-truncation = "^0.1.0"
-pydantic = "^1.6"
+pydantic = "^1.7"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.782"
