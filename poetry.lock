@@ -95,7 +95,7 @@ i18n = ["Babel (>=0.8)"]
 
 [[package]]
 name = "livereload"
-version = "2.6.2"
+version = "2.6.3"
 description = "Python LiveReload is an awesome tool for web developers"
 category = "main"
 optional = false
@@ -399,7 +399,7 @@ dev = ["pytest (>=4.6.2)", "black (>=19.3b0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "c9156d2c805b42ffe32583e11b5de4f53dc065d6c50e1788366de60e7d89a1de"
+content-hash = "d360523eb996dd5c1761dc2ada2c59ecc9906e1fe13d21dfab3ddaa4abd6d439"
 
 [metadata.files]
 atomicwrites = [
@@ -435,7 +435,7 @@ jinja2 = [
     {file = "Jinja2-2.11.2.tar.gz", hash = "sha256:89aab215427ef59c34ad58735269eb58b1a5808103067f7bb9d5836c651b3bb0"},
 ]
 livereload = [
-    {file = "livereload-2.6.2.tar.gz", hash = "sha256:d1eddcb5c5eb8d2ca1fa1f750e580da624c0f7fcb734aa5780dc81b7dcbd89be"},
+    {file = "livereload-2.6.3.tar.gz", hash = "sha256:776f2f865e59fde56490a56bcc6773b6917366bce0c267c60ee8aaf1a0959869"},
 ]
 loguru = [
     {file = "loguru-0.5.1-py3-none-any.whl", hash = "sha256:e5d362a43cd2fc2da63551d79a6830619c4d5b3a8b976515748026f92f351b61"},
