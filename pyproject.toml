@@ -10,7 +10,7 @@ python = "^3.8"
 jinja2 = "^2.11.2"
 tomlkit = "^0.7.0"
 mistune = {git = "https://github.com/lepture/mistune"}
-typer = "^0.3.0"
+typer = "^0.3.2"
 loguru = "^0.5.1"
 livereload = "^2.6.2"
 html5lib-truncation = "^0.1.0"
