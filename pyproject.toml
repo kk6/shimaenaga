@@ -19,7 +19,7 @@ pydantic = "^1.7"
 [tool.poetry.dev-dependencies]
 mypy = "^0.812"
 taskipy = "^1.6.0"
-flake8 = "^3.8.4"
+flake8 = "^3.9.0"
 pytest = "^6.2.2"
 
 [tool.poetry.scripts]
